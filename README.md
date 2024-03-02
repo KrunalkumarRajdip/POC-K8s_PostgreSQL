@@ -24,29 +24,41 @@ Before you begin, ensure you have the following tools installed:
 Run the following commands to create a PostgreSQL server in your Kubernetes cluster:
 
 ### Step 1: Create Kubernetes Secret for PostgreSQL credentials
-kubectl create secret generic postgres-credentials --from-literal=POSTGRES_USER=your_username --from-literal=POSTGRES_PASSWORD=your_password
+   ```bash
+   kubectl create secret generic postgres-credentials --from-literal=POSTGRES_USER=your_username --from-literal=POSTGRES_PASSWORD=your_password
+   ```
 
 ### Step 2: Create Persistent Volume (PV) for PostgreSQL data
+   ```bash
 kubectl apply -f postgres-pv.yaml
+```
 
 ### Step 3: Create Persistent Volume Claim (PVC) to bind to the PV
+```bash
 kubectl apply -f postgres-pvc.yaml
+```
 
 ### Step 4: Deploy PostgreSQL using Kubernetes Deployment
+```bash
 kubectl apply -f postgres-deployment.yaml
+```
 
 ### Step 5: Expose PostgreSQL using Kubernetes Service (LoadBalancer)
+```bash
 kubectl apply -f postgres-service.yaml
-
+```
 
 ## Accessing PostgreSQL
 
 After a few moments, the PostgreSQL server should be accessible using the LoadBalancer's external IP address or the appropriate service endpoint. You can connect to the server using your favorite PostgreSQL client.
 
 ## CleanUp:
-
+```bash
 - kubectl delete deployment postgres-deployment
 - kubectl delete service postgres-service
 - kubectl delete pvc postgres-pvc
 - kubectl delete pv postgres-pv
 - kubectl delete secret postgres-credentials
+```
+
+`````
